@@ -21,9 +21,9 @@ exports.getDataRecords = class MyAction extends ActionHero.Action {
             else frequency = 'WEEK';
 
             const query1 = `SELECT yourData FROM field1.data d
-        WHERE
-        d.data='${user_id}'  //during runtime input the user_id
-        ORDER BY data1 DESC`;
+            WHERE
+            d.data='${user_id}'  //during runtime input the user_id
+            ORDER BY data1 DESC`;
 
             const query2 = `SELECT yourData FROM yourTable where user='${user_id}'`;
 
@@ -87,15 +87,15 @@ exports.getDataRecords = class MyAction extends ActionHero.Action {
 
             //in case we want to build the query during runtime based on request payload
             const query5 = `SELECT
-        EXTRACT(${frequency} FROM c.data_date) as frequency,
-        CASE WHEN SUM((total_data/4) - data) < 0
-        THEN 0
-        ELSE SUM((total_data/4) - data)
-        END  as myData
-        FROM data_app.data_view c
-        WHERE c.dataid='${user_id}' AND c.data_date > '2018-05-01'
-        GROUP BY frequency
-        ORDER BY frequency`;
+            EXTRACT(${frequency} FROM c.data_date) as frequency,
+            CASE WHEN SUM((total_data/4) - data) < 0
+            THEN 0
+            ELSE SUM((total_data/4) - data)
+            END  as myData
+            FROM data_app.data_view c
+            WHERE c.dataid='${user_id}' AND c.data_date > '2018-05-01'
+            GROUP BY frequency
+            ORDER BY frequency`;
 
             //get all of it using promise 
             await Promise.all([
